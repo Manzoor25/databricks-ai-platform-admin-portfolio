@@ -59,7 +59,7 @@ What is billing now:
 - Key Vault (almost idle)
 - The VNet and budget do not bill
 
-No SQL warehouse, no cluster, no model serving endpoint, and no vector index were created, so those are not billing. A rough daily figure for an idle Premium workspace plus these PaaS resources is a few dollars, not tens. Check the budget in the portal rather than trusting a stale number. Budget name: `budget-dbx-ai-admin-lab`, $150/month, alerts at 50, 80, and 100 percent to the owner.
+No cluster, model serving endpoint, or vector index was created. A default "Serverless Starter Warehouse" (Small, PRO, auto-stop 10 minutes, id `f4eeb8600375fe7b`) was present and **STOPPED** when checked on 2026-10-27. A stopped warehouse does not bill DBU. Do not start it unless you need it. A rough daily figure for an idle Premium workspace plus these PaaS resources is a few dollars, not tens. Check the budget in the portal rather than trusting a stale number. Budget name: `budget-dbx-ai-admin-lab`, $150/month, alerts at 50, 80, and 100 percent to the owner.
 
 Tear it all down:
 
