@@ -1,0 +1,20 @@
+{
+  "enabled": false,
+  "name": "fdic-openai",
+  "why_disabled": "OpenAI public API is outside the Azure tenant. Leave disabled unless a reviewer accepts the data flow in the AI Feature Enablement Decision Matrix.",
+  "config": {
+    "served_entities": [
+      {
+        "name": "openai",
+        "external_model": {
+          "name": "gpt-4o-mini",
+          "provider": "openai",
+          "task": "llm/v1/chat",
+          "openai_config": {
+            "openai_api_key": "{{secrets/fdic-scope/openai-api-key}}"
+          }
+        }
+      }
+    ]
+  }
+}

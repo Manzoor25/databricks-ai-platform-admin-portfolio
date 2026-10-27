@@ -1,0 +1,62 @@
+# Secrets and local state
+.env
+.env.*
+!.env.example
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+backend.hcl
+.terraform/
+# Lock file is committed so CI resolves the same providers.
+!infra/.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.auto.tfvars
+!*.example.tfvars
+infra/terraform.tfvars
+infra/tfplan*
+tfplan
+tfplan.*
+*.tfplan
+
+# Keys and credentials
+*.pem
+*.pfx
+*.key
+id_rsa*
+credentials.json
+**/secrets/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+.coverage
+htmlcov/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Generated evidence that may contain tokens
+evidence/raw/
+*.log
+
+# Downloaded public docs cache (regenerable). Commit the 5-row sample only.
+data/raw/
+data/cache/
+evidence/fdic/

@@ -1,0 +1,19 @@
+{
+  "comment": "Unity Gateway (docs name as of 2026-10-27; older material says AI Gateway). Apply to every serving endpoint. Not applied in this run because no endpoint was created (ADR-0005).",
+  "docs": "https://learn.microsoft.com/en-us/azure/databricks/ai-gateway/",
+  "rate_limits": [
+    {"key": "user", "requests": 10, "renewal_period": "minute"},
+    {"key": "endpoint", "requests": 60, "renewal_period": "minute"}
+  ],
+  "usage_tracking": true,
+  "inference_table": "prod.ai.regulatory_assistant_payload",
+  "guardrails": {
+    "pii_behavior": "BLOCK",
+    "pii_types": ["SSN", "EMAIL", "PHONE"],
+    "safety": true
+  },
+  "permissions": {
+    "CAN_QUERY": ["dbx-data-scientists", "sp-dbx-regulatory-agent"],
+    "CAN_MANAGE": ["dbx-platform-admins"]
+  }
+}

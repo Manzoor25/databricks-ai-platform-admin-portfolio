@@ -1,0 +1,45 @@
+# Declarative Automation Bundle (CLI: databricks bundle).
+# Docs checked 2026-10-27: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/bundles/
+# Validate with: databricks bundle validate -t lab
+# Deploy is blocked until a metastore is assigned (ADR-0005). Do not claim it was deployed.
+
+bundle:
+  name: governed-lakehouse
+
+targets:
+  lab:
+    mode: production
+    workspace:
+      host: https://adb-7405619764740124.4.azuredatabricks.net
+    presets:
+      tags:
+        project: dbx-ai-admin
+        owner: mamoh
+        cost-center: personal-portfolio
+        environment: lab
+
+resources:
+  jobs:
+    fdic_ingest:
+      name: "[lab] fdic public ingest"
+      tags:
+        project: dbx-ai-admin
+        owner: mamoh
+        cost-center: personal-portfolio
+        environment: lab
+      schedule:
+        quartz_cron_expression: "0 0 6 * * ?"
+        timezone_id: America/New_York
+        pause_status: PAUSED
+      tasks:
+        - task_key: ingest_failures
+          notebook_task:
+            notebook_path: ./notebooks/01_ingest_fdic.py
+          environment_key: default
+      environments:
+        - environment_key: default
+          spec:
+            client: "2"
+            dependencies:
+              - requests
+              - faker

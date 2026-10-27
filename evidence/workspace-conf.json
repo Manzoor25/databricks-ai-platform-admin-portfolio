@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-27T22:20:00Z",
+  "host": "https://adb-7405619764740124.4.azuredatabricks.net",
+  "method": "GET/PATCH /api/2.0/workspace-conf with an Azure CLI token for resource 2ff814a6-3304-4ab8-85cb-cd0e6f879c1d. Token not stored.",
+  "before": {
+    "enableTokensConfig": "true",
+    "maxTokenLifetimeDays": "730",
+    "enableVerboseAuditLogs": null
+  },
+  "patch_status": 204,
+  "after": {
+    "enableResultsDownloading": "false",
+    "enableIpAccessLists": null,
+    "enableVerboseAuditLogs": "true",
+    "enableExportNotebook": "false",
+    "enableTokensConfig": "true",
+    "maxTokenLifetimeDays": "7"
+  },
+  "not_set": {
+    "enableIpAccessLists": "API returned null. IP access lists are documented as optional in the brief and are off. Turning them on from this laptop without a known egress IP would lock the admin out."
+  }
+}

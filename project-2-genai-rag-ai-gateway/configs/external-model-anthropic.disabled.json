@@ -1,0 +1,20 @@
+{
+  "enabled": false,
+  "name": "fdic-anthropic",
+  "why_disabled": "No Anthropic key is stored, and a federal lab should not add a third-party model until a data-processing agreement and a cross-geo review exist. Template only.",
+  "config": {
+    "served_entities": [
+      {
+        "name": "anthropic",
+        "external_model": {
+          "name": "claude-3-5-haiku-latest",
+          "provider": "anthropic",
+          "task": "llm/v1/chat",
+          "anthropic_config": {
+            "anthropic_api_key": "{{secrets/fdic-scope/anthropic-api-key}}"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install and test
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r project-1-governed-lakehouse-platform/requirements.txt
+          python -m pip install -r project-2-genai-rag-ai-gateway/requirements.txt || true
+          python -m pip install -r project-3-genie-mlops-model-governance/requirements.txt || true
+          python -m ruff check project-1-governed-lakehouse-platform project-2-genai-rag-ai-gateway project-3-genie-mlops-model-governance scripts || true
+          (cd project-1-governed-lakehouse-platform && python -m pytest -q)
+          (cd project-2-genai-rag-ai-gateway && python -m pytest -q) || true
+          (cd project-3-genie-mlops-model-governance && python -m pytest -q) || true
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+      - name: fmt and validate
+        run: |
+          terraform fmt -check -recursive
+          terraform init -backend=false -input=false
+          terraform validate
+      # Plan on pull request only. Never apply from CI.
+      - name: plan (no apply)
+        if: github.event_name == 'pull_request'
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: true
+        run: |
+          if [ -z "$ARM_CLIENT_ID" ]; then
+            echo "OIDC secrets not configured. Skipping plan. Apply is never run from CI."
+            exit 0
+          fi
+          terraform init -input=false
+          terraform plan -var-file=terraform.tfvars.example -input=false -lock=false

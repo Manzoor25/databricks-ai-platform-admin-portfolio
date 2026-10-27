@@ -1,0 +1,5 @@
+{"CITY": "Columbus", "ACTIVE": 1, "REPDTE": "06/30/2026", "ASSET": 4091315000, "CERT": 628, "STALP": "OH", "NAME": "JPMorgan Chase Bank, National Association", "ID": "628"}
+{"CITY": "Charlotte", "ACTIVE": 1, "REPDTE": "06/30/2026", "ASSET": 2654645000, "CERT": 3510, "STALP": "NC", "NAME": "Bank of America, National Association", "ID": "3510"}
+{"CITY": "Sioux Falls", "ACTIVE": 1, "REPDTE": "06/30/2026", "ASSET": 1976180000, "CERT": 7213, "STALP": "SD", "NAME": "Citibank, National Association", "ID": "7213"}
+{"CITY": "Sioux Falls", "ACTIVE": 1, "REPDTE": "06/30/2026", "ASSET": 1907928000, "CERT": 3511, "STALP": "SD", "NAME": "Wells Fargo Bank, National Association", "ID": "3511"}
+{"CITY": "New York", "ACTIVE": 1, "REPDTE": "06/30/2026", "ASSET": 758788000, "CERT": 33124, "STALP": "NY", "NAME": "Goldman Sachs Bank USA", "ID": "33124"}

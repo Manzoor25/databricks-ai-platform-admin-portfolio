@@ -1,0 +1,11 @@
+subscription_id       = "00000000-0000-0000-0000-000000000000"
+location              = "eastus"
+project               = "dbx-ai-admin"
+environment           = "lab"
+owner                 = "your-alias"
+cost_center           = "personal-portfolio"
+monthly_budget_usd    = 150
+alert_email           = "you@example.com"
+enable_private_link   = false
+enable_gpu            = false
+databricks_account_id = ""

@@ -1,0 +1,16 @@
+title = "portfolio gitleaks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allow documented secret references and placeholders"
+paths = [
+  '''docs/.*\.md''',
+  '''README\.md''',
+]
+regexes = [
+  '''\{\{secrets/[^}]+\}\}''',
+  '''REPLACE_ME''',
+  '''<your-.*>''',
+]

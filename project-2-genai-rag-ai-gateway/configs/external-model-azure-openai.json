@@ -1,0 +1,21 @@
+{
+  "name": "fdic-azure-openai",
+  "config": {
+    "served_entities": [
+      {
+        "name": "azure-openai",
+        "external_model": {
+          "name": "gpt-4o-mini",
+          "provider": "azure",
+          "task": "llm/v1/chat",
+          "azure_openai_config": {
+            "azure_endpoint": "https://REPLACE_ME.openai.azure.com/",
+            "azure_deployment_name": "gpt-4o-mini",
+            "microsoft_entra_tenant_id": "16b3c013-d300-468d-ac64-7eda0820b6d3"
+          }
+        }
+      }
+    ]
+  },
+  "notes": "Do not put an API key in this file. If a key is unavoidable, the endpoint config must reference {{secrets/fdic-scope/azure-openai-key}} and the secret must live in Key Vault. This lab prefers Entra ID auth and no key at all. Disabled until an Azure OpenAI resource is deployed. Not deployed in this run: see README status table."
+}

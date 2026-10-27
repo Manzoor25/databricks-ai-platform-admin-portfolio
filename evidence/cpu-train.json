@@ -1,0 +1,6 @@
+{
+  "device": "cpu",
+  "accuracy": 1.0,
+  "rows": 4.0,
+  "promoted": true
+}

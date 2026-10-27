@@ -1,0 +1,29 @@
+// Azure diagnostic settings on the Databricks workspace land in Log Analytics.
+// Table name follows AzureDiagnostics unless a resource-specific table is enabled.
+// Docs checked 2026-10-27:
+//   https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/audit-log-delivery
+
+// 1. Failed logins (workspace accounts category).
+AzureDiagnostics
+| where TimeGenerated > ago(7d)
+| where Category == "accounts"
+| where OperationName has_any ("login", "aadBrowserLogin", "jwtLogin")
+| where ResultType !in ("Success", "success", "200") or tostring(properties_s) has "failure"
+| project TimeGenerated, OperationName, Identity, ResultType, CallerIPAddress
+| order by TimeGenerated desc
+
+// 2. Permission changes.
+AzureDiagnostics
+| where TimeGenerated > ago(7d)
+| where Category in ("accounts", "sqlPermissions", "unityCatalog")
+| where OperationName has_any ("updatePermissions", "changeSecurableOwner", "addPrincipalToGroup")
+| project TimeGenerated, Category, OperationName, Identity, Properties = properties_s
+| order by TimeGenerated desc
+
+// 3. Cluster creates.
+AzureDiagnostics
+| where TimeGenerated > ago(7d)
+| where Category == "clusters"
+| where OperationName has_any ("create", "createResult")
+| project TimeGenerated, OperationName, Identity, Properties = properties_s
+| order by TimeGenerated desc
