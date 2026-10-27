@@ -78,6 +78,14 @@ Created Entra app `dbx-ai-admin-lab-gha` (`48cbcfca-35b1-475a-b6f1-d71395d9b18e`
 
 **Strong answer.** "I remove the GPU SKU from the family override and cap auto-termination. I do not tell the data scientists the GPU is available. If the family edit is rejected, I record the error and leave the residual risk visible. I do not start a VM to prove the policy."
 
+## 2026-10-27 — CI validate and the budget start date
+
+**What I did.** GitHub Actions `terraform validate` failed because `plantimestamp()` is unknown at validate time, so the budget start date became year 0001. Replaced it with `2026-10-01T00:00:00Z` and left `ignore_changes` on `time_period`. A later `terraform plan -var=enable_gpu=false` reported no changes.
+
+**Interview question.** "Why did validate fail when apply had already succeeded?"
+
+**Strong answer.** "Validate does not refresh state and does not know `plantimestamp()`. A provider check that requires a real date will fail in CI even though the applied budget is fine. Use a literal date, and ignore changes if you must not rewrite the live start."
+
 ## Still not verified
 
 - Unity Catalog metastore assignment. Still 403. Needs an account admin. Do not create a second metastore.

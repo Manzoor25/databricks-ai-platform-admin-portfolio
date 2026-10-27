@@ -35,10 +35,11 @@ resource "azurerm_consumption_budget_subscription" "this" {
   amount          = var.monthly_budget_usd
   time_grain      = "Monthly"
 
-  # Azure requires the budget start to be the first day of the current or a
-  # future month, at midnight UTC. plantimestamp() is stable across plans.
+  # A literal date so `terraform validate` does not see year 0001.
+  # plantimestamp() is unknown at validate time. ignore_changes keeps the
+  # already-applied budget start from being rewritten.
   time_period {
-    start_date = "${formatdate("YYYY-MM-01", plantimestamp())}T00:00:00Z"
+    start_date = "2026-10-01T00:00:00Z"
   }
 
   filter {
