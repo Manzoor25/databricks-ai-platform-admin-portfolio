@@ -10,6 +10,8 @@ What is here:
 - `configs/ai-gateway-rate-limit.json` — Unity Gateway (current name) rate limits, inference table, PII block, CAN_QUERY list. Not applied.
 - `configs/external-model-azure-openai.json` — template, no key. Prefers Entra ID.
 - `configs/external-model-anthropic.disabled.json` and `external-model-openai.disabled.json` — `enabled: false`. Secret reference only, no secret.
+- `MODEL_CARD.md` — filled, marked not deployed. No alias and no score.
+- `eval/regulatory_assistant_eval.jsonl` — 25 questions. Every row has `"scored": false`.
 
 Docs checked 2026-10-27:
 

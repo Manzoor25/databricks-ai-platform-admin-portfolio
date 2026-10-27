@@ -95,6 +95,23 @@ locals {
   })
 }
 
+# Definition only. count is always 1 so the spec is reviewable with the flag off.
+# create_in_workspace flips with enable_gpu. This resource is a local file, not a
+# Databricks instance pool and not an Azure VM. Do not read a plan diff here as
+# "a GPU machine will start."
+resource "local_file" "gpu_pool_definition" {
+  filename = "${path.module}/../evidence/plans/gpu-pool-definition.json"
+  content = jsonencode({
+    instance_pool_name                    = "gpu-lab-pool-definition-only"
+    node_type_id                          = "Standard_NC4as_T4_v3"
+    min_idle_instances                    = 0
+    max_capacity                          = 1
+    idle_instance_autotermination_minutes = 10
+    create_in_workspace                   = var.enable_gpu
+    note                                  = "Not a live pool. enable_gpu only changes this JSON. No databricks_instance_pool resource is declared, so terraform apply cannot start a GPU VM."
+  })
+}
+
 resource "local_file" "cluster_policies" {
   filename = "${path.module}/../evidence/plans/cluster-policies.json"
   content = jsonencode({
@@ -103,5 +120,6 @@ resource "local_file" "cluster_policies" {
     data_scientist_gpu = local.policy_data_scientist_gpu
     shared_standard    = local.policy_shared
     enable_gpu         = var.enable_gpu
+    gpu_pool_live      = false
   })
 }

@@ -1,0 +1,19 @@
+# terraform plan -var=enable_gpu=true
+# Saved 2026-10-27. This plan was NOT applied.
+# Plan: 2 to add, 0 to change, 1 to destroy.
+# Actions are local_file only, plus the enable_gpu output flipping false -> true.
+# No azurerm_* change. No databricks_instance_pool. No VM.
+#
+# local_file.cluster_policies must be replaced
+#   enable_gpu = false -> true
+#   gpu_pool_live = false
+# local_file.gpu_pool_definition will be created
+#   create_in_workspace = true
+#   node_type_id = Standard_NC4as_T4_v3
+#   min_idle_instances = 0
+#   note = Not a live pool. No databricks_instance_pool resource is declared.
+#
+# Changes to Outputs:
+#   enable_gpu = false -> true
+#
+# Do not apply this plan. The flag only changes JSON.

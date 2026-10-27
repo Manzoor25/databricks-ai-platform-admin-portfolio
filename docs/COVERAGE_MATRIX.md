@@ -11,10 +11,10 @@ Checked 2026-10-27. "Verified" means a command was run and the output is in `evi
 | 5 | Mentorship | `docs/onboarding/`, `docs/LEARNING_LOG.md` | Written. |
 | 6 | Strategic roadmap | `docs/roadmap/federal-regulator-12-month.md` | Written. |
 | 7 | Govern AI Gateway / Unity Gateway | `project-2-genai-rag-ai-gateway/configs/ai-gateway-rate-limit.json` | Written, not applied. Current product name is Unity Gateway. |
-| 8 | Cluster and workspace configuration | `infra/compute.tf`, `evidence/plans/cluster-policies.json`, workspace conf | Policies rendered and validated. Not pushed to the workspace API in this session. Workspace conf verified. |
+| 8 | Cluster and workspace configuration | `infra/compute.tf`, `evidence/policy-tightening.json`, `evidence/identity-and-pool.json` | Verified. Default Personal Compute no longer allowlists the T4, and both default policies cap auto-termination at 20 minutes. Persona policies exist. CPU pool `cpu-lab-pool` has `min_idle_instances=0`. Workspace conf verified. |
 | 9 | AI-assistive feature toggles and external model keys | `docs/onboarding/ai-feature-matrix.md`, external model templates | Templates only. No API key was created or stored. |
 | 10 | Unity Catalog administration | `project-1-governed-lakehouse-platform/sql/governance.sql`, ADR-0005 | Written, not executed. Assignment requires an account admin. |
-| 11 | Compute and cost, including GPU governance | ADR-0004, `docs/runbooks/enable-gpu-compute.md`, `enable_gpu = false` | Policy and IaC written and `terraform validate` passed. Execution on CPU (`evidence/cpu-train.json`). No GPU workload was run. GPU-ready by the `device` flag. |
+| 11 | Compute and cost, including GPU governance | ADR-0004, `docs/runbooks/enable-gpu-compute.md`, `evidence/plans/plan-enable-gpu-true.txt` | Policy and IaC validated. Plans with `enable_gpu` false and true change local JSON only. No GPU VM and no GPU pool were created. CPU training is `evidence/cpu-train.json`. |
 | 12 | Monitoring and logging | Diagnostic setting (imported to state), `sql/log_analytics_kql.kql`, `sql/system_tables.sql` | Diagnostic setting exists. KQL and system-table queries are written, not executed (no rows yet; system tables need a metastore). |
 | 13 | Accreditation prep | `docs/certification/study-guide.md` | Written from the public accreditation page, fetched 2026-10-27. |
 | 14 | Onboarding and Q&A | `docs/onboarding/faq.md` | Written. |

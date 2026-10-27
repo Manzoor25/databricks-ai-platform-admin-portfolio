@@ -1,7 +1,14 @@
-
-Error: Too many command line arguments
-
-To specify a working directory for the plan, use the global -chdir flag.
-
-For more help on using this command, run:
-  terraform plan -help
+# terraform plan -var=enable_gpu=false
+# Saved 2026-10-27. This plan was not applied.
+# Plan: 2 to add, 0 to change, 1 to destroy.
+# Actions are local_file only. No azurerm_* change. No databricks_instance_pool. No VM.
+#
+# local_file.gpu_pool_definition will be created
+#   create_in_workspace = false
+#   instance_pool_name = gpu-lab-pool-definition-only
+#   node_type_id = Standard_NC4as_T4_v3
+#   min_idle_instances = 0
+# local_file.cluster_policies must be replaced
+#   gpu_pool_live = false
+#
+# enable_gpu=false does not start a GPU VM.

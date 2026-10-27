@@ -7,6 +7,7 @@ Only what this repo actually did. Do not paste a bullet into a resume if you can
 - Diagnosed two subscription policy denials (storage shared-key auth, public network access on storage and Key Vault) and encoded the compliant settings in Terraform instead of fighting the policy.
 - Wrote Unity Catalog grants, column masks, and row filters for synthetic PII, and stopped when account-level metastore assignment returned 403. Documented the blocker instead of claiming the catalogs existed.
 - Ingested 4,117 public FDIC failed-bank records from `api.fdic.gov` and generated 50 clearly labeled synthetic complaint rows for a masking demo. No non-public data.
-- Defined persona cluster policies, including a GPU policy (ML runtime, GPU node allowlist, single node, 15-minute auto-termination, DBU cap) behind `enable_gpu = false`. Validated with `terraform validate`. Did not start a GPU VM.
+- Defined persona cluster policies, including a GPU policy behind `enable_gpu = false`, then removed `Standard_NC4as_T4_v3` from the default Personal Compute allowlist and capped default auto-termination at 20 minutes. Did not start a GPU VM.
+- Created five workspace groups, a CPU instance pool with `min_idle_instances=0`, and a GitHub Actions OIDC app with no client secret and Reader on the lab resource group only.
 - Ran the bank-distress training entry point on CPU (`device=cpu`) and recorded the output. The same job takes `cuda` when a GPU exists. No GPU run is claimed.
 - Wrote the AI Gateway (Unity Gateway) rate-limit, guardrail, and external-model templates with secret references only (`{{secrets/...}}`). No key in git, and the disabled Anthropic and OpenAI templates stay disabled.

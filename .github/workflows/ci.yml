@@ -43,17 +43,19 @@ jobs:
           terraform fmt -check -recursive
           terraform init -backend=false -input=false
           terraform validate
-      # Plan on pull request only. Never apply from CI.
+      # Plan on pull request only. Never apply from CI. No client secret is stored.
+      - name: Azure login (OIDC, no client secret)
+        if: github.event_name == 'pull_request' && vars.AZURE_CLIENT_ID != ''
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
       - name: plan (no apply)
         if: github.event_name == 'pull_request'
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_USE_OIDC: true
         run: |
-          if [ -z "$ARM_CLIENT_ID" ]; then
-            echo "OIDC secrets not configured. Skipping plan. Apply is never run from CI."
+          if [ -z "${{ vars.AZURE_CLIENT_ID }}" ]; then
+            echo "OIDC variables not configured. Skipping plan. Apply is never run from CI."
             exit 0
           fi
           terraform init -input=false

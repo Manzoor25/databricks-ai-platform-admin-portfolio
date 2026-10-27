@@ -17,3 +17,5 @@ Not verified, and not claimed:
 - AI Runtime / serverless GPU. Docs say it is available in the United States geo (checked 2026-10-26). This session did not attach a notebook to it.
 
 GPU policy and the enablement runbook live in `infra/compute.tf` and `docs/runbooks/enable-gpu-compute.md`.
+
+`GENIE_QUALITY_CHECKLIST.md` is the publish gate for the space. The 15-question benchmark is written and not run.

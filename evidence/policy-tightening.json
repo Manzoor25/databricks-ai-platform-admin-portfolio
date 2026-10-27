@@ -1,0 +1,42 @@
+{
+  "personal_compute_gpu_nodes_before": [
+    "Standard_D4ds_v5",
+    "Standard_D8ds_v5",
+    "Standard_D16ds_v5",
+    "Standard_D4ds_v4",
+    "Standard_D8ds_v4",
+    "Standard_D16ds_v4",
+    "Standard_DS3_v2",
+    "Standard_DS4_v2",
+    "Standard_DS5_v2",
+    "Standard_NC4as_T4_v3"
+  ],
+  "personal_compute_edit": {
+    "status": 200,
+    "body": "{}"
+  },
+  "personal_compute_after": {
+    "gpu_node_present": false,
+    "autotermination_minutes": {
+      "type": "range",
+      "minValue": 10,
+      "maxValue": 20,
+      "defaultValue": 20,
+      "isOptional": false
+    }
+  },
+  "shared_compute_edit": {
+    "status": 200,
+    "body": "{}"
+  },
+  "shared_compute_after": {
+    "autotermination_minutes": {
+      "type": "range",
+      "minValue": 10,
+      "maxValue": 20,
+      "defaultValue": 20,
+      "isOptional": false
+    }
+  },
+  "ai_runtime_pools": "FEATURE_DISABLED: the GPU pools API is not enabled for this workspace"
+}

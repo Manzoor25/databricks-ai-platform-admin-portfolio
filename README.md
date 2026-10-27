@@ -29,7 +29,7 @@ Solid lines are deployed. Dotted lines are designed and not connected. ADR-0005 
 | --- | --- |
 | Workspace administration | Token lifetime 7 days, export off, verbose audit. `evidence/workspace-conf.json` |
 | Infrastructure as code | `infra/`. Applied. Two subscription policies encoded, not bypassed |
-| Cost guardrails | $150 budget, 50/80/100 alerts, 20-minute auto-termination in policy JSON |
+| Cost guardrails | $150 budget. Default policies now cap auto-termination at 20 minutes. CPU pool min idle is 0 |
 | GPU governance without quota | Policy behind `enable_gpu = false`. CPU run in `evidence/cpu-train.json`. No GPU run |
 | Honesty about account scope | ADR-0005. Metastore assign returned 403 |
 
@@ -46,8 +46,10 @@ The full map is `docs/COVERAGE_MATRIX.md`.
 | CPU training entry point | Ran. Output in `evidence/cpu-train.json` |
 | Unity Catalog metastore, catalogs, masks, pipelines | Written in `sql/governance.sql`. Not executed. Account admin required |
 | AI Search index, serving endpoint, Unity Gateway, Genie space | Config and SQL written. Not created. Same blocker |
-| GPU workload | Not run. Do not say it was |
-| GitHub Actions | Workflow committed. Not yet executed. No green badge is claimed |
+| Default cluster policies | Tightened. Personal Compute no longer allowlists `Standard_NC4as_T4_v3`. Evidence: `evidence/policy-tightening.json` |
+| Workspace groups and CPU pool | Five SCIM groups. `cpu-lab-pool` created with `min_idle_instances=0`. No node warmed |
+| GPU workload | Not run. `enable_gpu=true` plan changes JSON only. Do not say a GPU ran |
+| GitHub Actions | Workflow committed. OIDC app has no client secret. No green badge is claimed |
 
 ## Cost
 
@@ -91,7 +93,7 @@ terraform apply -var-file=terraform.tfvars
 - `docs/LEARNING_LOG.md` — what happened, including the failures
 - `docs/adr/` — region, identity, network, GPU, the account-admin blocker
 - `docs/runbooks/` — onboard, token incident, cost spike, cluster start, UC denial, GPU
-- `docs/onboarding/` — day 1 for analysts and data scientists, agent rules, FAQ
+- `docs/onboarding/` — day 1 guides, FAQ, and a 60-minute AI governance outline
 - `docs/interview-prep/` — pitch, STAR, whiteboard, 50 questions
 - `docs/certification/study-guide.md` — mapped to the public accreditation page
 - `docs/RESUME_BULLETS.md` — only bullets the repo can defend

@@ -60,9 +60,27 @@ Unity Catalog did not auto-attach. Creating a metastore failed because account `
 
 **Strong answer.** "I confirm the 403 and write down the account id and the exact error. I do not create a second metastore; the account is already at the regional limit. I send the account admin a one-step assignment request for the existing East US metastore. Meanwhile I ship the controls I do own: workspace conf, cluster policies, diagnostic settings, the budget, and the pipeline code that will run the moment the metastore is assigned. I do not mark Unity Catalog as done."
 
-## Not yet verified
+## 2026-10-27 — Default policies, groups, and a cold CPU pool
 
-- `terraform apply` of the foundation (in progress when this entry was first written; update with resource IDs when it finishes).
-- Unity Catalog metastore assignment (needs the Databricks account ID from the account console).
-- AI Runtime enablement on the new workspace.
-- Any GPU workload. None has been executed. Do not say otherwise.
+**What I did.** The workspace shipped Personal Compute with `Standard_NC4as_T4_v3` on the allowlist and a 4320-minute auto-termination default. Shared Compute defaulted auto-termination to 0. Editing the family policy failed until the call kept `policy_family_id` and sent `policy_family_definition_overrides` instead of a full `definition`. After the edit, Personal Compute has no NC node, and both policies are a 10–20 minute range with default 20. Evidence: `evidence/policy-tightening.json`.
+
+Created five workspace SCIM groups matching the Entra groups, added the lab user to `dbx-platform-admins`, and granted CAN_USE on the persona policies. Created `cpu-lab-pool` (`Standard_DS3_v2`, `min_idle_instances=0`). No cluster was started. The GPU pools API returned `FEATURE_DISABLED`. No GPU pool was created.
+
+Created Entra app `dbx-ai-admin-lab-gha` (`48cbcfca-35b1-475a-b6f1-d71395d9b18e`) with federated credentials for GitHub Actions and Reader on the lab resource group. No client secret.
+
+**Why.** A new Premium workspace is not safe because it is Premium. The default compute policy is the hole. Identity for CI should be a federated credential, not a stored key.
+
+**Admin concept.** Policy families cannot be detached from the default policies. You override them. And a pool with `min_idle_instances=0` is a configuration object, not a running VM.
+
+**Common mistake.** Putting `project` or `owner` in pool custom tags. Databricks already uses those keys, and the API rejects the conflict. Also, PUTting a GET of the permissions API fails because the response shape is not the request shape. PATCH the new grant.
+
+**Interview question.** "The default Personal Compute policy allows a T4. What do you change, and what do you not claim?"
+
+**Strong answer.** "I remove the GPU SKU from the family override and cap auto-termination. I do not tell the data scientists the GPU is available. If the family edit is rejected, I record the error and leave the residual risk visible. I do not start a VM to prove the policy."
+
+## Still not verified
+
+- Unity Catalog metastore assignment. Still 403. Needs an account admin. Do not create a second metastore.
+- AI Search, serving, Unity Gateway, and Genie. Written. Not created.
+- Any GPU workload. None has been executed.
+- GitHub Actions has not been observed green. The workflow is committed. Do not claim a green badge.

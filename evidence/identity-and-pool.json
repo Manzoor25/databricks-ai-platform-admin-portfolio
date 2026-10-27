@@ -1,0 +1,76 @@
+{
+  "workspace_groups": [
+    {
+      "name": "dbx-platform-admins",
+      "id": "2123871875565496",
+      "action": "exists"
+    },
+    {
+      "name": "dbx-data-engineers",
+      "id": "2127182767327176",
+      "action": "exists"
+    },
+    {
+      "name": "dbx-data-scientists",
+      "id": "2123458484263877",
+      "action": "exists"
+    },
+    {
+      "name": "dbx-analysts",
+      "id": "2122083436193508",
+      "action": "exists"
+    },
+    {
+      "name": "dbx-ai-agents",
+      "id": "2122834584005552",
+      "action": "exists"
+    }
+  ],
+  "platform_admin_membership": {
+    "status": 200,
+    "workspace_user_id": "148553635536944",
+    "group_id": "2123871875565496"
+  },
+  "entra_platform_admin_membership": {
+    "status": 1,
+    "action": "exists",
+    "detail": ""
+  },
+  "cpu_pool": {
+    "action": "created",
+    "status": 200,
+    "instance_pool_id": "1027-223923-ibex39-pool-0u4sm6xu",
+    "min_idle_instances": 0,
+    "detail": ""
+  },
+  "policy_grants": [
+    {
+      "policy_id": "001FB22F6D18074A",
+      "group": "dbx-data-engineers",
+      "action": "exists"
+    },
+    {
+      "policy_id": "001A994CD1E24E23",
+      "group": "dbx-data-scientists",
+      "action": "exists"
+    },
+    {
+      "policy_id": "001E1DD5311C19C2",
+      "group": "dbx-analysts",
+      "action": "exists"
+    }
+  ],
+  "github_oidc_app": {
+    "action": "exists",
+    "app_id": "48cbcfca-35b1-475a-b6f1-d71395d9b18e",
+    "client_secret_created": false,
+    "service_principal": "ok",
+    "federated_credential": "ok",
+    "federated_credential_pr": "ok",
+    "role": "Reader",
+    "scope": "/subscriptions/0076286c-b9d6-4cc4-9617-774b869e75e2/resourceGroups/rg-dbx-ai-admin-lab",
+    "role_assignment": "ok"
+  },
+  "gpu_pool": "not created",
+  "note": "CPU pool min_idle_instances is 0. No cluster was started. No GPU pool was created."
+}

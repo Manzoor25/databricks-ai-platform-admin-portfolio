@@ -32,9 +32,10 @@ WORKSPACE_CONF = {
 
 
 def _az_token() -> str:
+    az = "az.cmd" if os.name == "nt" else "az"
     completed = subprocess.run(
         [
-            "az",
+            az,
             "account",
             "get-access-token",
             "--resource",

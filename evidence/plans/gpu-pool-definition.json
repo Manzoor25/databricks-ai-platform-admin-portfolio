@@ -1,0 +1,1 @@
+{"create_in_workspace":false,"idle_instance_autotermination_minutes":10,"instance_pool_name":"gpu-lab-pool-definition-only","max_capacity":1,"min_idle_instances":0,"node_type_id":"Standard_NC4as_T4_v3","note":"Not a live pool. enable_gpu only changes this JSON. No databricks_instance_pool resource is declared, so terraform apply cannot start a GPU VM."}
