@@ -1,5 +1,7 @@
 # Databricks AI Platform Admin portfolio
 
+[![ci](https://github.com/Manzoor25/databricks-ai-platform-admin-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Manzoor25/databricks-ai-platform-admin-portfolio/actions/workflows/ci.yml)
+
 Personal lab. Public FDIC data and synthetic rows only. Not an FDIC system, not FedRAMP authorized, not running on GPU.
 
 This is the workspace and the written operating model for a Databricks AI platform administrator supporting a US financial regulator. It is not a claim that every control is live. The status table is the contract.
@@ -49,7 +51,7 @@ The full map is `docs/COVERAGE_MATRIX.md`.
 | Default cluster policies | Tightened. Personal Compute no longer allowlists `Standard_NC4as_T4_v3`. Evidence: `evidence/policy-tightening.json` |
 | Workspace groups and CPU pool | Five SCIM groups. `cpu-lab-pool` created with `min_idle_instances=0`. No node warmed |
 | GPU workload | Not run. `enable_gpu=true` plan changes JSON only. Do not say a GPU ran |
-| GitHub Actions | Workflow committed. OIDC app has no client secret. No green badge is claimed |
+| GitHub Actions | Tests and `terraform validate` passed on `a1dcbb0`. Plan is pull-request only and has not run. No apply from CI. OIDC app has no client secret |
 
 ## Cost
 

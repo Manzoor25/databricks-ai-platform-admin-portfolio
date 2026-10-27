@@ -91,4 +91,4 @@ Created Entra app `dbx-ai-admin-lab-gha` (`48cbcfca-35b1-475a-b6f1-d71395d9b18e`
 - Unity Catalog metastore assignment. Still 403. Needs an account admin. Do not create a second metastore.
 - AI Search, serving, Unity Gateway, and Genie. Written. Not created.
 - Any GPU workload. None has been executed.
-- GitHub Actions has not been observed green. The workflow is committed. Do not claim a green badge.
+- GitHub Actions plan-on-pull-request has not run. Tests and `terraform validate` passed on push `a1dcbb0`. Do not claim a plan or an apply from CI.
